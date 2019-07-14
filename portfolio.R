@@ -77,51 +77,99 @@
 #        subtitle = date) +
 #   theme(legend.position = "right") 
 
-#source: newbernvote.R
-#code:
-ggplot() +
-  geom_polygon(data = p.maps[p.maps$Muni %in% "RAL",], 
-               #geom_polygon(data = p.maps, 
-               color = "white", 
-               #fill = "light blue", 
-               aes(x = x, y = y, group = ENR_DESC, 
-                   fill = `Turnout %`)) +
-  geom_path(data = brt.nb, color = "red",
-            aes(x = X, y = Y, group = group)) +
-  scale_fill_viridis_c(option = "D") +
-  coord_equal() +
-  theme_minimal() + 
-  theme(axis.text = element_blank(), 
-        axis.title = element_blank()) +
-  labs(title = "Voting Precinct Turnout for 2016 Sales Tax Referendum", 
-       fill = "Voter Turnout")
-ggplot() +
-  geom_polygon(data = p.maps[p.maps$Muni %in% "RAL",], 
-               color = "white", 
-               #fill = "light blue", 
-               aes(x = x, y = y, group = ENR_DESC, 
-                   fill = pct_for)) +
-  geom_path(data = brt.nb, color = "red",
-            aes(x = X, y = Y, group = group)) +
-  scale_fill_viridis_c(option = "D") +
-  coord_equal() +
-  theme_minimal() + 
-  theme(axis.text = element_blank(), 
-        axis.title = element_blank()) +
-  labs(title = "Voting Precinct Support for 2016 Sales Tax Referendum", 
-       fill = "% Voting YES")
-ggplot() +
-  geom_polygon(data = p.maps[p.maps$Muni %in% "RAL",], 
-               color = "white", 
-               #fill = "light blue", 
-               aes(x = x, y = y, group = ENR_DESC, 
-                   fill = Against / `Registered Voters` * 100)) +
-  geom_path(data = brt.nb, color = "red",
-            aes(x = X, y = Y, group = group)) +
-  scale_fill_viridis_c(option = "A") +
-  coord_equal() +
-  theme_minimal() + 
-  theme(axis.text = element_blank(), 
-        axis.title = element_blank()) +
-  labs(title = "Voting Precinct Support for 2016 Sales Tax Referendum", 
-       fill = "% of Registered\nVoters who Turned\nout and Voted NO")
+# #source: newbernvote.R
+# #code:
+# ggplot() +
+#   geom_polygon(data = p.maps[p.maps$Muni %in% "RAL",], 
+#                #geom_polygon(data = p.maps, 
+#                color = "white", 
+#                #fill = "light blue", 
+#                aes(x = x, y = y, group = ENR_DESC, 
+#                    fill = `Turnout %`)) +
+#   geom_path(data = brt.nb, color = "red",
+#             aes(x = X, y = Y, group = group)) +
+#   scale_fill_viridis_c(option = "D") +
+#   coord_equal() +
+#   theme_minimal() + 
+#   theme(axis.text = element_blank(), 
+#         axis.title = element_blank()) +
+#   labs(title = "Voting Precinct Turnout for 2016 Sales Tax Referendum", 
+#        fill = "Voter Turnout")
+# ggplot() +
+#   geom_polygon(data = p.maps[p.maps$Muni %in% "RAL",], 
+#                color = "white", 
+#                #fill = "light blue", 
+#                aes(x = x, y = y, group = ENR_DESC, 
+#                    fill = pct_for)) +
+#   geom_path(data = brt.nb, color = "red",
+#             aes(x = X, y = Y, group = group)) +
+#   scale_fill_viridis_c(option = "D") +
+#   coord_equal() +
+#   theme_minimal() + 
+#   theme(axis.text = element_blank(), 
+#         axis.title = element_blank()) +
+#   labs(title = "Voting Precinct Support for 2016 Sales Tax Referendum", 
+#        fill = "% Voting YES")
+# ggplot() +
+#   geom_polygon(data = p.maps[p.maps$Muni %in% "RAL",], 
+#                color = "white", 
+#                #fill = "light blue", 
+#                aes(x = x, y = y, group = ENR_DESC, 
+#                    fill = Against / `Registered Voters` * 100)) +
+#   geom_path(data = brt.nb, color = "red",
+#             aes(x = X, y = Y, group = group)) +
+#   scale_fill_viridis_c(option = "A") +
+#   coord_equal() +
+#   theme_minimal() + 
+#   theme(axis.text = element_blank(), 
+#         axis.title = element_blank()) +
+#   labs(title = "Voting Precinct Support for 2016 Sales Tax Referendum", 
+#        fill = "% of Registered\nVoters who Turned\nout and Voted NO")
+
+# #source: RoutePlanningGroup.R
+# #code: 
+# ggplot() + 
+#   labs(title = "Planning Group Projects", 
+#        subtitle = format(Sys.Date(), format = "%B %d, %Y"),
+#        color = "Owner") +
+#   geom_blank(data = group.work) + 
+#   geom_vline(xintercept = Sys.Date(),color = "#aa6666", size = 1, linetype = "2232") +
+#   geom_segment(data = gw.segs[gw.segs$proj.arrow != TRUE,], 
+#                size = 1.75,
+#                aes(x = proj.start, xend = proj.end, 
+#                    y = project, yend = project, 
+#                    color = owner_f)) + 
+#   geom_segment(data = gw.segs[gw.segs$proj.arrow == TRUE,], 
+#                #arrow.fill = "white", 
+#                size = 1.75,
+#                arrow = arrow(type = "closed", angle = 35, 
+#                              length = unit(0.075, "inches")),
+#                aes(x = proj.start, xend = proj.end, 
+#                    y = project, yend = project, 
+#                    color = owner_f)) + 
+#   geom_point(data = gw.points, 
+#              aes(x = due, y = project)) + 
+#   geom_text(data = gw.points, 
+#             aes(x = due, y = project, label = task)) +
+#   
+#   scale_x_date(name = "Date", 
+#                date_labels = "%b '%y", 
+#                date_breaks = "3 months",
+#                date_minor_breaks = "1 month") +
+#   scale_y_discrete(name = element_blank()) +
+#   scale_color_brewer(palette = "Dark2")+
+#   theme_bw() +
+#   theme(strip.text.y = element_text(angle = 0), 
+#         #axis.text.y = element_blank(),
+#         #axis.ticks.y = element_blank(),
+#         axis.text.x = element_text(angle = 45, hjust = 1),
+#         legend.position = "right",
+#         panel.background = element_rect(color = "light grey",  size = 1)) +
+#   coord_cartesian(xlim = c(min(c(Sys.Date(),
+#                                  group.work$due)[!is.na(c(Sys.Date(), 
+#                                                           group.work$due))]), 
+#                            max(c(group.work$due, 
+#                                  group.work$proj.end)[!is.na(c(group.work$due, 
+#                                                                group.work$proj.end))]))) +
+#   facet_grid(area~owner_f, drop = TRUE, scales = "free_y", space = "free_y") 
+
