@@ -173,3 +173,33 @@
 #                                                                group.work$proj.end))]))) +
 #   facet_grid(area~owner_f, drop = TRUE, scales = "free_y", space = "free_y") 
 
+# #source: bylaws.R
+# #code: 
+# ggplot() + 
+#   geom_label(data = s3.t, fill = "black",
+#              fontface = "bold",
+#              aes(x = str_wrap(LongName,13),
+#                  y = str_wrap(purpose_f,15),
+#                  color = n,
+#                  label = paste(round(n*100),"%",sep = ""))) +
+#   geom_label(data = s3.txt, 
+#              color = "white", #fill = "black",
+#              fontface = "bold", 
+#              aes(x = str_wrap(LongName,13),
+#                  y = str_wrap(purpose_f,15),
+#                  label = label, 
+#                  fill = Location_f)) + 
+#   facet_grid(purpose_f~Location_f, space = "free", scales = "free", 
+#              margins = FALSE, switch = "both") +
+#   theme_bw()+
+#   theme(legend.position = "none",
+#         #strip.text.x = element_blank(),
+#         axis.text.y = element_blank(), 
+#         axis.ticks.y = element_blank(),
+#         strip.text.y = element_text(angle = 180)) +
+#   scale_x_discrete(name = "Source", position = "top") + 
+#   scale_y_discrete(name = "Element") + 
+#   scale_color_gradient(low = "white", high = "orange") +
+#   labs(title = "Bylaws Matrix", 
+#        subtitle = paste("Updated:", Sys.Date()),
+#        fill = "Type of Group")
