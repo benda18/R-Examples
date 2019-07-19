@@ -78,7 +78,8 @@ while (now < fut) {
   rm(response.v)
   
   #time tidy----
-  rline.test$time <- rline.test$data.20.last_updated_on %>% ymd_hms(., tz = "America/New_York") 
+  #rline.test$time <- rline.test$data.20.last_updated_on %>% ymd_hms(., tz = "America/New_York") 
+  rline.test$time <- rline.test$data.20.last_updated_on %>% with_tz(., tz = "America/New_York") 
   
   
 
