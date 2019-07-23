@@ -46,24 +46,25 @@ fun_bbox <- function(data, x = "stop_lon", y = "stop_lat", padding = 0) {
 #vars----
 
 grid.box <- data.frame(name = NA, 
-                       x    = c(-90,-90,-77,-77), 
-                       y    = c(34,39,39,34), 
+                       x    = c(-84,-84,-77,-77), 
+                       y    = c(34,37,37,34), 
                        stringsAsFactors = FALSE) %>% 
   .[!duplicated(.),]
 
+# data.frame(x = rep(seq.int(min(grid.box$x), max(grid.box$x), by = 0.5), times = 7), 
+#            y = rep(seq.int(min(grid.box$y), max(grid.box$y), by = 0.5), each = 15))
+
 grid.points <- data.frame(name = NA, 
-                          x    = rep(min(grid.box$x):max(grid.box$x), 
-                                     each = max(diff(grid.box$y)+1)) , 
-                          y    = rep(min(grid.box$y):max(grid.box$y), 
-                                     length.out =  max(diff(grid.box$x)+1)),
+                          x = rep(seq.int(min(grid.box$x), max(grid.box$x), by = 0.5), times = 7), 
+                          y = rep(seq.int(min(grid.box$y), max(grid.box$y), by = 0.5), each = 15),
                           stringsAsFactors = FALSE) %>% 
   .[!duplicated(.),]
 
 ggplot() + 
-  geom_histogram(data = grid.points, bins = 14,
+  geom_histogram(data = grid.points, bins = 8,
                  aes(x = x, fill = factor(y)), color = "white" ) 
 ggplot() +
-  geom_histogram(data = grid.points, bins = 6, 
+  geom_histogram(data = grid.points, bins = 4, 
                  aes(x = y, fill = factor(x)), color = "white")
 #data----
 center.nc <- state.center %>% 
@@ -80,7 +81,7 @@ bb <- data.frame(left = min(grid.points$x),
 
 
 
-base.map <- fun_map(zoom = 5, darken.n = 0.5, darken.c = "black",
+base.map <- fun_map(zoom = 7, darken.n = 0.5, darken.c = "black",
                     padding = 0.5,
                     bbox = bb)  +
   theme(axis.text = element_text(), 
